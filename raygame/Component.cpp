@@ -15,6 +15,10 @@ Component::Component(const char* name)
 	m_name = name;
 }
 
+Component::~Component()
+{
+}
+
 void Component::assignOwner(Actor* owner)
 {
 	if (!getOwner())
