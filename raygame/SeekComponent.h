@@ -2,7 +2,9 @@
 #include "Component.h"
 #include <Vector2.h>
 #include "Transform2D.h"
+#include "MoveComponent.h"
 
+class Actor;
 class SeekComponent 
 	: public Component
 {
@@ -11,12 +13,16 @@ public:
 
 	//Inherited from component class
 	void update(float deltaTime) override;
+	void getDesiredVelocity();
+	Actor* getAgent();
+	Actor* getTarget();
+	
 
 private:
-	MathLibrary::Vector2 m_velocity;
-	float m_maxSpeed;
-
-
-
+	
+	MathLibrary::Vector2 m_desiredVelocity;
+	MathLibrary::Vector2* m_steeringForce;
+	Actor* m_agent;
+	Actor* m_target;
 };
 
