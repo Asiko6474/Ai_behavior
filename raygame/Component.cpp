@@ -3,7 +3,6 @@
 Component::Component()
 {
 	m_owner = nullptr;
-	m_name = nullptr;
 	m_started = false;
 }
 
@@ -12,7 +11,6 @@ Component::Component()
 Component::Component(const char* name)
 {
 	m_started = false;
-	m_name = name;
 }
 
 Component::~Component()

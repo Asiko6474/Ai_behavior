@@ -2,10 +2,11 @@
 #include "raylib.h"
 #include "Transform2D.h"
 #include "MainScene.h"
+#include "ActorArray.h"
 
 bool Engine::m_applicationShouldClose = false;
 Scene** Engine::m_scenes = new Scene*;
-ActorArray Engine::m_actorsToDelete = ActorArray();
+DynamicArray Engine::m_actorsToDelete = DynamicArray();
 int Engine::m_sceneCount = 0;
 int Engine::m_currentSceneIndex = 0;
 
@@ -128,19 +129,19 @@ int Engine::addScene(Scene* scene)
 	return index;
 }
 
-void Engine::addActorToDeletionList(Actor* actor)
+void Engine::addActorToDeletionList( Actor* actor)
 {
 	//return if the actor is already going to be deleted
 	if (m_actorsToDelete.contains(actor))
 		return;
 
 	//Add actor to deletion list
-	m_actorsToDelete.addActor(actor);
+	m_actorsToDelete.add(actor);
 
 	//Add all the actors children to the deletion list
 	for (int i = 0; i < actor->getTransform()->getChildCount(); i++)
 	{
-		m_actorsToDelete.addActor(actor->getTransform()->getChildren()[i]->getOwner());
+		m_actorsToDelete.add(actor->getTransform()->getChildren()[i]->getOwner());
 	}
 }
 
@@ -229,7 +230,7 @@ void Engine::destroyActorsInList()
 	}
 
 	//Clear the array
-	m_actorsToDelete = ActorArray();
+	m_actorsToDelete = DynamicArray();
 }
 
 void Engine::CloseApplication()

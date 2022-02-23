@@ -9,7 +9,7 @@ class SeekComponent
 	: public Component
 {
 public:
-	SeekComponent(const char* name = "SeekComponent") : Component::Component(name) {}
+	SeekComponent() : Component::Component() {};
 
 	//Inherited from component class
 	void update(float deltaTime) override;

@@ -50,13 +50,17 @@ public:
     /// </summary>
     /// <param name="componentName">The name of the component</param>
     /// <returns>the name of the component instance</returns>
-    Component* getComponent(const char* componentName);
+    template<typename T>
+    T* getComponent();
 
     /// <summary>
     /// Adds a component to the end of the component array
     /// </summary>
     /// <param name="component">The new component to attach to the actor</param>
     /// <returns>a reference to the component added to the array</returns>
+    template<typename T>
+    T* addComponent();
+
     Component* addComponent(Component* component);
 
     /// <summary>
@@ -64,7 +68,8 @@ public:
     /// </summary>
     /// <param name="component">The component to remove from the array</param>
     /// <returns>whether or not the removal was successful</returns>
-    bool removeComponent(Component* component);
+    template<typename T>
+    bool removeComponent();
 
     /// <summary>
     /// Removes the first instance found that matches the component reference

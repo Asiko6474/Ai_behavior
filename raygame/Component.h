@@ -9,12 +9,6 @@ public:
 	virtual ~Component();
 
 	/// <summary>
-	/// Gets the name of this component.
-	/// </summary>
-	/// <returns></returns>
-	const char* getName() { return m_name; }
-
-	/// <summary>
 	/// Gets the actor that this component is attached to.
 	/// </summary>
 	/// <returns></returns>
@@ -42,7 +36,6 @@ public:
 
 private:
 	Actor* m_owner;
-	const char* m_name;
 	bool m_started;
 };
 
