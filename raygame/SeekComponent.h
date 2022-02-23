@@ -14,6 +14,8 @@ public:
 	//Inherited from component class
 	void update(float deltaTime) override;
 	void getDesiredVelocity();
+	void getSteeringForce();
+	MathLibrary::Vector2 getCurrentVelocity() { return m_currentVelocity; }
 	Actor* getAgent();
 	Actor* getTarget();
 	
@@ -21,6 +23,7 @@ public:
 private:
 	
 	MathLibrary::Vector2 m_desiredVelocity;
+	MathLibrary::Vector2 m_currentVelocity;
 	MathLibrary::Vector2* m_steeringForce;
 	Actor* m_agent;
 	Actor* m_target;
