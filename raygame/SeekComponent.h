@@ -1,15 +1,17 @@
 #pragma once
-#include "Component.h"
+#include "SteeringComponent.h"
 #include <Vector2.h>
 #include "Transform2D.h"
 #include "MoveComponent.h"
 
 class Actor;
+class MoveComponent;
+
 class SeekComponent 
-	: public Component
+	: public SteeringComponent
 {
 public:
-	SeekComponent() : Component::Component() {};
+	MathLibrary::Vector2 calculateForce() override;
 
 	//Inherited from component class
 	void update(float deltaTime) override;

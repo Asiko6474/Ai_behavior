@@ -152,6 +152,10 @@ void Actor::onCollision(Actor* other)
         m_component[i]->onCollision(other);
 }
 
+void Actor::onAddComponent(Component* component)
+{
+}
+
 void Actor::update(float deltaTime)
 {
     for (int i = 0; i < m_componentCount; i++)

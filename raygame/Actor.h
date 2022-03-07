@@ -115,6 +115,10 @@ public:
     /// </summary>
     /// <param name="other">The actor this actor collided with.</param>
     virtual void onCollision(Actor* other);
+    /// <summary>
+    /// Called whenever a component is added to the vector
+    /// </summary>
+    virtual void onAddComponent(Component* component);
 
 protected:
     const char* m_name;
