@@ -4,14 +4,11 @@ class Component
 {
 public:
 	Component();
-
-	Component(const char* name);
-	virtual ~Component();
+	virtual ~Component() {}
 
 	/// <summary>
-	/// Gets the actor that this component is attached to.
+	/// Gets the actor that this component is attached to
 	/// </summary>
-	/// <returns></returns>
 	Actor* getOwner() { return m_owner; }
 
 	/// <summary>
@@ -21,17 +18,16 @@ public:
 	void assignOwner(Actor* owner);
 
 	/// <summary>
-	/// Returns whether or not the start function for this component instance has been called
+	/// Gets whether or not the start function for this component instance has been called
 	/// </summary>
-	/// <returns></returns>
 	bool getStarted() { return m_started; }
 
-	//Functions called by the actor class.
-	virtual void start() {m_started = true;}
-	virtual void update(float deltaTime);
-	virtual void end();
-	virtual void draw();
-	virtual void onCollision(Actor* other);
+	//Functions called by actor class
+	virtual void start() { m_started = true; }
+	virtual void update(float deltaTime) {}
+	virtual void draw() {}
+	virtual void end() {}
+	virtual void onCollision(Actor* other) {}
 	virtual void onDestroy() {};
 
 private:

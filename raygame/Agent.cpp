@@ -1,4 +1,6 @@
 #include "Agent.h"
+#include "MoveComponent.h"
+#include "SteeringComponent.h"
 
 void Agent::Start()
 {
@@ -23,9 +25,9 @@ void Agent::Update(float deltaTime)
 
 void Agent::onAddComponent(Component* component)
 {
-	SteeringComponent* steeringComponent = dynamic_cast<SteeringComponent*>(component)
+	SteeringComponent* steeringComponent = dynamic_cast<SteeringComponent*>(component);
 		if (steeringComponent != nullptr)
-			m_steeringComponents.addItem(steeringComponent);
+			m_steeringComponents.add(steeringComponent);
 }
 
 float Agent::getMaxForce()

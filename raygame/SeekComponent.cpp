@@ -1,50 +1,23 @@
 #include "SeekComponent.h"
 #include "Actor.h"
 #include "Transform2D.h"
+#include "Agent.h"
+#include "MoveComponent.h"
 
 MathLibrary::Vector2 SeekComponent::calculateForce()
 {
 	if (!getTarget())
-		return { 0, 0 };
+		return { 0,0 };
 
-	MathLibrary::Vector2 directionToTarget = getTarget()->getTransform()->getWorldPosition() - getOwner()->getTransform()->getWorldPosition();
+	setSteeringForce(500);
 
-	MathLibrary::Vector2 desiredVelocity = directionToTarget.getNormalized() * getSteeringForce();
-	MathLibrary::Vector2 seekForce = desiredVelocity 
+	MathLibrary::Vector2 directionToTarget = getTarget()->getTransform()->getWorldPosition()
+		- getOwner()->getTransform()->getWorldPosition();
 
-	return MathLibrary::Vector2();
-}
+	MathLibrary::Vector2 desriredVelocity = directionToTarget.getNormalized() * getSteeringForce();
+	MathLibrary::Vector2 seekForce = desriredVelocity - getAgent()->getMoveComponent()->getVelocity();
 
-void SeekComponent::update(float deltaTime)
-{
-
-	/*MathLibrary::Vector2 moveDirection = (m_target->getTransform()->getLocalPosition() - getTransform()->getLocalPosition());
-	m_moveComponent->setVelocity(moveDirection.getNormalized() * 200);*/
-
-	
-	
-}
-
-void SeekComponent::getDesiredVelocity()
-{
-
-	MathLibrary::Vector2 V1 = (getAgent()->getTransform()->getLocalPosition(), getTarget()->getTransform()->getLocalPosition());
-	m_desiredVelocity = V1.getNormalized() * 200;
-}
-
-void SeekComponent::getSteeringForce()
-{
-	m_steeringForce = getDesiredVelocity() - getCurrentVelocity();
-}
-
-Actor* SeekComponent::getAgent()
-{
-	return m_agent;
-}
-
-Actor* SeekComponent::getTarget()
-{
-	return m_target;
+	return seekForce;
 }
 
 

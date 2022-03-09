@@ -70,13 +70,13 @@ template<typename T>
 inline void DynamicArray<T>::add(T actor)
 {
     //Create a new array with a size one greater than our old array
-    T* appendedArray = new T * [m_count + 1];
+    T* appendedArray = new T[m_count + 1];
     //Copy the values from the old array to the new array
     for (int i = 0; i < m_count; i++)
     {
         appendedArray[i] = m_items[i];
     }
-
+    delete[] m_items;
     //Set the last value in the new array to be the actor we want to add
     appendedArray[m_count] = actor;
     //Set old array to hold the values of the new array
@@ -95,7 +95,7 @@ inline bool DynamicArray<T>::remove(T actor)
 
     bool actorRemoved = false;
     //Create a new array with a size one less than our old array
-    T* newArray = new T * [m_count - 1];
+    T* newArray = new T[m_count - 1];
     //Create variable to access tempArray index
     int j = 0;
     //Copy values from the old array to the new array
@@ -133,7 +133,7 @@ inline bool DynamicArray<T>::remove(int index)
     bool actorRemoved = false;
 
     //Create a new array with a size one less than our old array 
-    T* newArray = new T * [m_count - 1];
+    T* newArray = new T[m_count - 1];
     //Create variable to access tempArray index
     int j = 0;
     //Copy values from the old array to the new array

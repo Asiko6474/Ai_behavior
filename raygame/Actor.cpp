@@ -11,6 +11,10 @@ Actor::Actor()
 
 Actor::~Actor()
 {
+    ///Deletes all components
+    for (int i = 0; i < m_componentCount; i++)
+        delete m_components[i];
+
     delete m_transform;
 }
 
@@ -39,106 +43,21 @@ Component* Actor::addComponent(Component* component)
     //copy the values from the old array to the new array
     for (int i = 0; i < m_componentCount; i++)
     {
-        appendArray[i] = m_component[i];
+        appendArray[i] = m_components[i];
     }
     //set the last value in the new array to be the actor we want to add
     appendArray[m_componentCount] = component;
     if (m_componentCount > 1)
-        delete[] m_component;
+        delete[] m_components;
     else if (m_componentCount == 1)
-        delete m_component;
+        delete m_components;
 
 
     //set the old array to hold the values of the new array
-    m_component = appendArray;
+    m_components = appendArray;
     m_componentCount++;
 
     return component;
-}
-
-template<typename T>
-T* Actor::getComponent()
-{
-    //iterate through the component array
-    for (int i = 0; i < m_componentCount; i++)
-    {
-        T* temp = dynamic_cast<T*>(m_components[i]);
-
-        if (temp)
-            return (T*)m_components[i];
-    }
-    //return nullptr if the component is not in the list
-    return nullptr;
-}
-
-template<typename T>
-inline T* Actor::addComponent()
-{
-    T* component = new T();
-    // return null if this component has na owner already
-        Actor* owner = component->getOwner();
-    if (owner)
-        return nullptr;
-
-    component->assignOwner(this);
-
-    //create a new array with a size one greater than our old array
-    Component** appendArray = new Component * [m_componentCount + 1];
-    //copy the values from the old array to the new array
-    for (int i = 0; i < m_componentCount; i++)
-    {
-        appendArray[i] = m_component[i];
-    }
-    //set the last value in the new array to be the actor we want to add
-    appendArray[m_componentCount] = component;
-    if (m_componentCount > 1)
-        delete[] m_component;
-    else if (m_componentCount == 1)
-        delete m_component;
-
-
-    //set the old array to hold the values of the new array
-    m_component = appendArray;
-    m_componentCount++;
-
-    return component;
-}
-
-template<typename T>
-inline bool Actor::removeComponent()
-{
-    bool componentRemoved = false;
-    //create a new array with a size one greater than our old array
-    Component** newArray = new Component * [m_componentCount - 1];
-    int j = 0;
-    //copy the values from the old array to the new array
-    for (int i = 0; i < m_componentCount; i++)
-    {
-        T* temp = dynamic_cast<T*>(m_components[i]);
-        if (!temp)
-        {
-            newArray[j] = m_components[i];
-            j++;
-        }
-        else
-        {
-            componentRemoved = true;
-        }
-    }
-
-    if (componentRemoved)
-    {
-        //set the old array to the new array
-        delete[] m_component;
-        m_component = newArray;
-        m_componentCount--;
-        delete name;
-    }
-    else
-        delete[] newArray;
-
-    //returns whether or not the removal was successful.
-    return componentRemoved;
 }
 
 void Actor::start()
@@ -149,7 +68,7 @@ void Actor::start()
 void Actor::onCollision(Actor* other)
 {
     for (int i = 0; i < m_componentCount; i++)
-        m_component[i]->onCollision(other);
+        m_components[i]->onCollision(other);
 }
 
 void Actor::onAddComponent(Component* component)
@@ -160,30 +79,30 @@ void Actor::update(float deltaTime)
 {
     for (int i = 0; i < m_componentCount; i++)
     {
-        if (m_component[i]->getStarted())
-            m_component[i]->start();
+        if (m_components[i]->getStarted())
+            m_components[i]->start();
 
-        m_component[i]->update(deltaTime);
+        m_components[i]->update(deltaTime);
     }
 }
 
 void Actor::draw()
 {
     for (int i = 0; i < m_componentCount; i++)
-        m_component[i]->draw();
+        m_components[i]->draw();
 }
 
 void Actor::end()
 {
     m_started = false;
     for (int i = 0; i < m_componentCount; i++)
-        m_component[i]->end();
+        m_components[i]->end();
 }
 
 void Actor::onDestroy()
 {
     for (int i = 0; i < m_componentCount; i++)
-        m_component[i]->onDestroy();
+        m_components[i]->onDestroy();
 
     //Removes this actor from its parent if it has one
     if (getTransform()->getParent())

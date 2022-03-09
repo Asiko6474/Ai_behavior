@@ -20,13 +20,8 @@ public:
 
 	void setMaxForce(float maxForce);
 
-	MathLibrary::Vector2 getForce();//returns the force current being applied to this agent
+	MoveComponent* getMoveComponent() { return m_moveComponent; }
 
-	MathLibrary::Vector2 setForce();//applies the given force to the agent
-
-	MoveComponent* getMoveComponent();
-
-	void setForce(MathLibrary::Vector2 force);
 private:
 	
 	DynamicArray<SteeringComponent*> m_steeringComponents;//an array containing all steering compnents attached to the agent

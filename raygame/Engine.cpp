@@ -6,7 +6,6 @@
 
 bool Engine::m_applicationShouldClose = false;
 Scene** Engine::m_scenes = new Scene*;
-DynamicArray Engine::m_actorsToDelete = DynamicArray();
 int Engine::m_sceneCount = 0;
 int Engine::m_currentSceneIndex = 0;
 
@@ -30,14 +29,14 @@ void Engine::start()
 
 	//Start the scene
 	m_currentSceneIndex = addScene(new MainScene());
+
+	addScene(new MainScene);
+
 	m_scenes[m_currentSceneIndex]->start();
 }
 
 void Engine::update(float deltaTime)
 {
-	//Clean up actors marked for destruction
-	destroyActorsInList();
-
 	//Update scene
 	m_scenes[m_currentSceneIndex]->update(deltaTime);
 	m_scenes[m_currentSceneIndex]->updateUI(deltaTime);
@@ -129,22 +128,6 @@ int Engine::addScene(Scene* scene)
 	return index;
 }
 
-void Engine::addActorToDeletionList( Actor* actor)
-{
-	//return if the actor is already going to be deleted
-	if (m_actorsToDelete.contains(actor))
-		return;
-
-	//Add actor to deletion list
-	m_actorsToDelete.add(actor);
-
-	//Add all the actors children to the deletion list
-	for (int i = 0; i < actor->getTransform()->getChildCount(); i++)
-	{
-		m_actorsToDelete.add(actor->getTransform()->getChildren()[i]->getOwner());
-	}
-}
-
 bool Engine::removeScene(Scene* scene)
 {
 	//If the scene is null then return before running any other logic
@@ -194,6 +177,9 @@ void Engine::setCurrentScene(int index)
 
 	//Update the current scene index
 	m_currentSceneIndex = index;
+
+	if (!m_scenes[m_currentSceneIndex]->getStarted())
+		m_scenes[m_currentSceneIndex]->start();
 }
 
 bool Engine::getKeyDown(int key)
@@ -208,29 +194,7 @@ bool Engine::getKeyPressed(int key)
 
 void Engine::destroy(Actor* actor)
 {
-	addActorToDeletionList(actor);
-}
-
-void Engine::destroyActorsInList()
-{
-	//Iterate through deletion list
-	for (int i = 0; i < m_actorsToDelete.getLength(); i++)
-	{
-		//Remove actor from the scene
-		Actor* actorToDelete = m_actorsToDelete.getActor(i);
-		if (!getCurrentScene()->removeActor(actorToDelete))
-			getCurrentScene()->removeUIElement(actorToDelete);
-
-		//Call actors clean up functions
-		actorToDelete->end();
-		actorToDelete->onDestroy();
-
-		//Delete the actor
-		delete actorToDelete;
-	}
-
-	//Clear the array
-	m_actorsToDelete = DynamicArray();
+	//getCurrentScene()->destroy(actor);
 }
 
 void Engine::CloseApplication()

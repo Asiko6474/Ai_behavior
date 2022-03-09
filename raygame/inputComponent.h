@@ -7,13 +7,9 @@ class InputComponent :
 	public Component
 {
 public:
-	InputComponent(const char* name = "InputComponent") : Component::Component(name) {}
+	InputComponent(const char* name = "InputComponent") : Component::Component() {}
 
 	MathLibrary::Vector2 getMoveAxis();
-	float removeHealth();
-	void showCollider();
-
-	bool getSpacePress() { return RAYLIB_H::IsKeyPressed(m_action1Key); }
 
 
 private:
