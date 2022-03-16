@@ -28,7 +28,7 @@ public:
 	BooleanDecision(Decision* leftChild = nullptr, Decision* rightChild = nullptr);
 
 private:
-	Decision* m_left;
-	Decision* m_right;
+	Decision* m_no;
+	Decision* m_yes;
 };
 

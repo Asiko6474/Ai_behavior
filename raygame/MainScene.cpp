@@ -4,9 +4,7 @@
 #include "Transform2D.h"
 #include "Player.h"
 #include "Agent.h"
-#include "SeekComponent.h"
-#include "WanderComponent.h"
-#include "StateMachineComponent.h"
+#include "Enemy.h"
 
 void MainScene::start()
 {
@@ -14,20 +12,10 @@ void MainScene::start()
 	player->getTransform()->setScale({ 50,50 });
 	player->addComponent(new SpriteComponent("Images/player.png"));
 	MoveComponent* playerMove = player->addComponent<MoveComponent>();
+	playerMove->setUpdateFacing(true);
 
-	Agent* agent = new Agent();
-	agent->getTransform()->setScale({ 50,50 });
-	agent->setMaxForce(200);
-	agent->addComponent(new SpriteComponent("Images/enemy.png"));
+	Enemy* enemy = new Enemy(100, 100, "Enemy", 100, 50, player);
 
-	WanderComponent* comp = new WanderComponent(1000, 100, 100);
-	agent->addComponent(comp);
-
-	SeekComponent* seekComponent = new SeekComponent();
-	seekComponent->setSteeringForce(500);
-	seekComponent->setTarget(player);
-	agent->addComponent(seekComponent);
-	agent->addComponent<StateMachineComponent>();
 	addActor(player);
-	addActor(agent);
+	addActor(enemy);
 };

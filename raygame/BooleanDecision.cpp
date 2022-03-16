@@ -4,18 +4,18 @@ void BooleanDecision::makeDecision(Agent* agent, float deltaTime)
 {
 	if (checkCondition(agent, deltaTime))
 	{
-		if (m_left)
-			m_left->makeDecision(agent, deltaTime);
+		if (m_no)
+			m_no->makeDecision(agent, deltaTime);
 	}
 	else
 	{
-		if (m_right)
-			m_right->makeDecision(agent, deltaTime);
+		if (m_yes)
+			m_yes->makeDecision(agent, deltaTime);
 	}
 }
 
 BooleanDecision::BooleanDecision(Decision* leftChild, Decision* rightChild)
 {
-	m_left = leftChild;
-	m_right = rightChild;
+	m_no = leftChild;
+	m_yes = rightChild;
 }

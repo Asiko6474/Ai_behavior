@@ -10,6 +10,7 @@ class Agent :
 	public Actor
 {
 public:
+	Agent(float x, float y, const char* name, float maxForce, float maxSpeed);
 	void Start();//initializes move component
 
 	void Update(float deltaTime);//gets the sum of all forces being acted on the agent and applies it to its velocity.
