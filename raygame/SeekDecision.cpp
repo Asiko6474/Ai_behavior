@@ -1,5 +1,6 @@
 #include "SeekDecision.h"
 #include "SeekComponent.h"
+#include "WanderComponent.h"
 #include "Agent.h"
 #include "Enemy.h"
 

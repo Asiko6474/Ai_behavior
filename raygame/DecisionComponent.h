@@ -2,6 +2,7 @@
 #include "Component.h"
 
 class Decision;
+class Agent;
 
 class DecisionComponent :
 	public Component
@@ -13,6 +14,6 @@ public:
 
 private:
 	Decision* m_root;
-	Agent* m_owner;
+	Agent* m_Owner;
 };
 

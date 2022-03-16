@@ -13,8 +13,8 @@ public:
 	Actor* getTarget() { return m_target; }
 	void setTarget(Actor* target) { m_target = target; }
 
-	bool getIsAgressive() { return m_isAggressive; }
-	bool setIsAggressive(bool value) { m_isAggressive = value; }
+	bool getIsAggressive() { return m_isAggressive; }
+	bool setIsAggressive(bool value) { m_isAggressive = value; return value; }
 private:
 	Actor* m_target;
 	bool m_isAggressive;

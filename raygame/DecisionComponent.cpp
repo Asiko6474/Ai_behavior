@@ -4,14 +4,13 @@
 
 void DecisionComponent::start()
 {
-	m_owner = dynamic_cast<Agent*>(getOwner());
+	m_Owner = dynamic_cast<Agent*>(getOwner());
 }
 
 void DecisionComponent::update(float deltaTime)
 {
-
-	if (m_owner)
-		m_root->makeDecision(m_owner, deltaTime);
+	if (m_Owner)
+		m_root->makeDecision(m_Owner, deltaTime);
 	else
 		throw std::exception("Decision component can only be attached to agents.");
 }

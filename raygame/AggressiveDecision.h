@@ -4,7 +4,7 @@ class AggressiveDecision :
 	public BooleanDecision
 {
 public:
-	AggressiveDecision(Decision* left = nullptr, Decision* right = nullptr) : AggressiveDecision(left, right) {};
+	AggressiveDecision(Decision* left = nullptr, Decision* right = nullptr) : BooleanDecision::BooleanDecision(left, right) {};
 	bool checkCondition(Agent* agent, float deltaTime) override;
 };
 

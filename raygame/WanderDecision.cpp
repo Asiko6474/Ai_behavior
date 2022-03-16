@@ -7,7 +7,7 @@ void WanderDecision::makeDecision(Agent* agent, float deltaTime)
 {
 	WanderComponent* wander = agent->getComponent<WanderComponent>();
 	SeekComponent* seek = agent->getComponent<SeekComponent>();
-
+	
 	if (wander)
 		wander->setSteeringForce(52);
 

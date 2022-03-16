@@ -93,7 +93,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AggressiveDecision.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\Decisions</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleDecision.cpp">
+      <Filter>Header Files\Decisions</Filter>
+    </ClCompile>
+    <ClCompile Include="SeekDecision.cpp">
+      <Filter>Header Files\Decisions</Filter>
+    </ClCompile>
+    <ClCompile Include="WanderDecision.cpp">
+      <Filter>Header Files\Decisions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,10 +178,19 @@
     <ClInclude Include="Decision.h">
       <Filter>Header Files\Decisions</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AggressiveDecision.h">
+      <Filter>Header Files\Decisions</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleDecision.h">
+      <Filter>Header Files\Decisions</Filter>
+    </ClInclude>
+    <ClInclude Include="SeekDecision.h">
+      <Filter>Header Files\Decisions</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderDecision.h">
+      <Filter>Header Files\Decisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
